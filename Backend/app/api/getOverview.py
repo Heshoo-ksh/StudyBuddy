@@ -1,14 +1,13 @@
-from flask import Blueprint, request, jsonify
+from flask import request, jsonify
 from shared.openAIFunctions import generateContext
 
-overview = Blueprint('overview', __name__)
+def overview_routes(app):
 
-@overview.route('/getOverview', methods=['GET'])
-def get_overview_endpoint():
-    data = request.get_json()
-    level = data.get('level')
-    topic = data.get('topic')
-    number = data.get('number')
+    @app.route('/getOverview', methods=['GET'])
+    def get_overview_endpoint():
+        level = request.args.get('level')
+        topic = request.args.get('topic')
+        number = request.args.get('number')
 
-    response = generateContext(level, topic, number)
-    return jsonify(response)
+        response = generateContext(level, topic, number)
+        return jsonify(response)
