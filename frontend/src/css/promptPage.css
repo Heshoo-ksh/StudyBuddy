@@ -1,0 +1,16 @@
+.text-wrapper {
+    width: 500px;
+    margin-top: 30px;
+}
+
+.select-wrapper {
+    width: 150px;
+    margin: 20px;
+}
+
+.form-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
