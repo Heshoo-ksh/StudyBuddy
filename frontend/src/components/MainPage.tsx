@@ -8,8 +8,7 @@ function MainPage(props: any) {
         axios.get('http://127.0.0.1:5000/getOverview',{
           params: {
             level: props.level,
-            topic: props.prompt,
-            number: props.numCards
+            topic: props.prompt
           }
         }).then((res) => {
           console.log(res);
