@@ -28,23 +28,38 @@ def generateOverviewWithOpenAI(subjectName, gradeLevel):
     return response.choices[0].message['content']
 
 def parse_overview_to_json(overview_text):
-    lines = overview_text.split("\n")
+    lines = overview_text.strip().split("\n") 
     json_objects = []
+    i = 0 
 
-    for i in range(0, len(lines), 3):
-        if len(lines[i]) == 0:
+    while i < len(lines):  
+        if len(lines[i].strip()) == 0: 
+            i += 1
             continue
-        
-        title = lines[i].split(":")[1].strip(' "')
-        content = lines[i+1].split(":")[1].strip()
 
-        json_object = {
-            "overviewTitle": title,
-            "overviewContent": content
-        }
-        json_objects.append(json_object)
+        try:
+            title = lines[i].split(":")[1].strip(' "')
+            i += 1
 
+            content = lines[i].split(":")[1].strip()
+            i += 1
+          
+            json_object = {
+                "overviewTitle": title,
+                "overviewContent": content
+            }
+            
+            json_objects.append(json_object)
+
+            i += 1 
+
+        except IndexError:
+            break  
+        except Exception as e:
+            print(f"An error occurred: {e}")
+            i += 1  
     return json_objects
+
 
 def generateContext(level, topic):
     overview_text = generateOverviewWithOpenAI(topic, level)
