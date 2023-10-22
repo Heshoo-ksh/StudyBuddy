@@ -5,8 +5,9 @@ import { CircularProgress, Container, Divider } from "@mui/material";
 
 function MainPage(props: any) {
   const [overviewData, setOverviewData] = useState<Array<{ overviewTitle: string, overviewContent: string }>>([]); // Typed
-  const [isLoading, setIsLoading] = useState(false);
 
+  const [isLoading, setIsLoading] = useState(false);
+        
   useEffect(() => {
     setIsLoading(true);
     axios.get('http://127.0.0.1:5000/getOverview', {
@@ -16,6 +17,7 @@ function MainPage(props: any) {
     }
     }).then((res) => {
         setIsLoading(false);
+
         setOverviewData(res.data);
     }).catch((err) => {
         if (err.response) {
