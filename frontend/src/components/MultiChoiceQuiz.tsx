@@ -1,17 +1,20 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
-import { Button, Container, Divider, FormControl, FormControlLabel, FormHelperText, FormLabel, Radio, RadioGroup } from "@mui/material";
+import { Button, CircularProgress, Container, Divider, FormControl, FormControlLabel, FormHelperText, FormLabel, Radio, RadioGroup } from "@mui/material";
 import '../css/multiChoiceQuiz.css';
 
 function FlashcardsPage(props: any) {
     const [data, setData] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
+        setIsLoading(true);
         axios.get('http://localhost:5000/getMultiChoiceQuiz', {
           params: {
             level: props.level
           }
         }).then((res) => {
+            setIsLoading(false);
           setData(res.data);
         }).catch((err) => {
           if( err.response ){
@@ -58,7 +61,7 @@ function FlashcardsPage(props: any) {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-// validate answers
+        // validate answers
         for (let i = 0; i < data.length; i++) {
             if (answers[i + 1] === data[i]['correct_answer']) {
                 setNumCorrect(numCorrect + 1);
@@ -76,7 +79,13 @@ function FlashcardsPage(props: any) {
 
 
     return (
-        <Container maxWidth="xs" sx={{ boxShadow: 3 }}>
+        <>
+        {(isLoading) ? 
+            (<Container maxWidth="md" sx={{ boxShadow: 3 }}>
+            <h1>Loading Quiz...</h1>
+            <CircularProgress color="secondary" />
+            </Container>) : 
+            (<Container maxWidth="xs" sx={{ boxShadow: 3 }}>
             <h1>Multiple Choice Quiz</h1>
             <Divider light />
             {!isQuizSubmitted && 
@@ -96,7 +105,8 @@ function FlashcardsPage(props: any) {
                 <p>Your score is {(numCorrect / (numCorrect + numIncorrect)) * 100}% :^)</p>
             </div>
             }
-        </Container>
+        </Container>) }
+        </>
     );
 }
 
