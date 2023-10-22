@@ -1,0 +1,14 @@
+.gradeLevelSelect {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    animation: 3s infinite alternate slidein;
+
+}
+
+.radioGroup {
+    margin-top: 25px;
+    margin-bottom: 40px;
+}

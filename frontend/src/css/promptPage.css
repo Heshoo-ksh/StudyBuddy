@@ -1,0 +1,22 @@
+.prompt-wrapper {
+    animation-name: fadeInOut, moveLeft300px, bounce;
+    animation-duration: 2.5s, 5s, 1s;
+    animation-iteration-count: 2, 1, 5;
+}
+
+.text-wrapper {
+    width: 500px;
+    margin-top: 30px;
+}
+
+.select-wrapper {
+    width: 150px;
+    margin: 20px;
+}
+
+.form-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
