@@ -1,20 +1,21 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
 import '../css/mainPage.css';
-import { Container, Divider } from "@mui/material";
+import { CircularProgress, Container, Divider } from "@mui/material";
 
 function MainPage(props: any) {
   const [overviewData, setOverviewData] = useState<Array<{ overviewTitle: string, overviewContent: string }>>([]); // Typed
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     axios.get('http://127.0.0.1:5000/getOverview', {
     params: {
         level: props.level,
         topic: props.prompt
     }
     }).then((res) => {
-        console.log("Received response:", res.data);
-        console.log("Complete Response:", res);  // Log entire response
+        setIsLoading(false);
         setOverviewData(res.data);
     }).catch((err) => {
         if (err.response) {
@@ -33,13 +34,17 @@ function MainPage(props: any) {
   );
 
   return (
-    <Container maxWidth="md" sx={{ boxShadow: 3 }}>
-      <div className="mainPageWrapper">
-        <h1>Here is an overview of your topic.</h1>
-        <Divider light />
-        { Overview }
-      </div>
-    </Container>
+    <>
+      {(isLoading) ? 
+        (<p>hihihdf</p>) : 
+        (<Container maxWidth="md" sx={{ boxShadow: 3 }}>
+          <div className="mainPageWrapper">
+            <h1>Here is an overview of your topic.</h1>
+            <Divider light />
+            { Overview }
+          </div>
+        </Container>) }
+    </>
   );
 }
 
