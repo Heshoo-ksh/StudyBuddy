@@ -5,7 +5,6 @@ import { useState } from "react";
 function PromptPage(props: any) {
   const [cardAmnt, setCardAmnt] = useState('');
   const [prompt, setPrompt] = useState('');
-  const [nextDisabled, setNextDisabled] = useState(true);
 
   const handleChange = (event: SelectChangeEvent) => {
     setCardAmnt(event.target.value as string);
@@ -54,7 +53,7 @@ function PromptPage(props: any) {
             <Button 
             className="nextButton" 
             variant="contained" 
-            disabled={cardAmnt == "" || prompt.trim() == ""} 
+            disabled={cardAmnt === "" || prompt.trim() === ""} 
             color="success"
             onClick = {handleClick}
             >

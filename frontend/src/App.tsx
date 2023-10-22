@@ -3,8 +3,6 @@ import './App.css';
 import GradeLevelSelect from './components/GradeLevelSelect';
 import PromptPage from './components/PromptPage';
 import MainPage from './components/MainPage';
-import { Box, useTheme } from '@mui/system';
-import { AppBar, Tab, Tabs, Typography } from '@mui/material';
 
 function App() {
   const [showGradeLevel, setShowGradeLevel] = useState(true);
