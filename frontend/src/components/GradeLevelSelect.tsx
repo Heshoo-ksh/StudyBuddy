@@ -4,16 +4,17 @@ import { useState } from "react";
 
 function GradeLevelSelect(props: any) {
     const [nextDisabled, setNextDisabled] = useState(true);
-    const [value, setValue] = useState('');
+    const [promptVal, setPromptVal] = useState('');
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setValue((event.target as HTMLInputElement).value);
+        setPromptVal((event.target as HTMLInputElement).value);
         setNextDisabled(false);
     };
 
     const handleClick = () => {
         props.setShowGradeLevel(false);
         props.setShowPromptPage(true);
+        props.setValue(promptVal);
     }
 
   return (
