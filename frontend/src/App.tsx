@@ -108,7 +108,7 @@ function App() {
               <MainPage level={levelVal} prompt={promptVal} numCards={numCards} />
             </TabPanel>
             <TabPanel value={value} index={1} dir={theme.direction}>
-              <FlashcardsPage />
+              <FlashcardsPage level={levelVal} prompt={promptVal} numCards={numCards}/>
             </TabPanel>
             <TabPanel value={value} index={2} dir={theme.direction}>
               Item Three
