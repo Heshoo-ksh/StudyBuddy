@@ -1,7 +1,11 @@
 import openai
 import os
-
+import json
 openai.api_key = os.getenv("OPENAI_API_KEY")
+
+def save_to_json(data, filename="overview.json"):
+    with open(filename, 'w') as f:  
+        json.dump(data, f)
 
 def generateOverviewWithOpenAI(subjectName, gradeLevel):
 
@@ -59,5 +63,6 @@ def parse_overview_to_json(overview_text):
 
 def generateContext(level, topic):
     overview_text = generateOverviewWithOpenAI(topic, level)
-    response = parse_overview_to_json(overview_text)
+    response = parse_overview_to_json(overview_text) 
+    save_to_json(response)
     return response

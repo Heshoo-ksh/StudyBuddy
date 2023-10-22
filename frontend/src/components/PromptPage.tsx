@@ -2,14 +2,22 @@ import { Box, Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEve
 import '../css/promptPage.css';
 import { useState } from "react";
 
-function PromptPage() {
+function PromptPage(props: any) {
   const [cardAmnt, setCardAmnt] = useState('');
   const [prompt, setPrompt] = useState('');
-  const [nextDisabled, setNextDisabled] = useState(true);
 
   const handleChange = (event: SelectChangeEvent) => {
     setCardAmnt(event.target.value as string);
   };
+
+  const handleClick = () => {
+    props.setShowPromptPage(false);
+    props.setShowMainPage(true);
+    props.setNumCards(cardAmnt as string);
+    console.log(cardAmnt);
+    console.log(prompt);
+    props.setPromptVal(prompt);
+  }
 
   return (
     <div className="prompt-wrapper">
@@ -46,7 +54,15 @@ function PromptPage() {
                     </FormControl>
                 </Box>                         
             </div>
-            <Button className="nextButton" variant="contained" disabled={cardAmnt == "" || prompt.trim() == ""} color="success">Next</Button>
+            <Button 
+            className="nextButton" 
+            variant="contained" 
+            disabled={cardAmnt === "" || prompt.trim() === ""} 
+            color="success"
+            onClick = {handleClick}
+            >
+                Next
+            </Button>
         </div>
     </div>
   );
