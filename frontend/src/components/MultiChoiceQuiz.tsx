@@ -75,12 +75,17 @@ function FlashcardsPage(props: any) {
     const [value, setValue] = useState('');
     const [numCorrect, setNumCorrect] = useState(0);
     const [numIncorrect, setNumIncorrect] = useState(0);
-    const answers: any = {};
+    const [curQuestionIndx, setCurQuestionIndx] = useState(0);
+    const [isQuizSubmitted, setIsQuizSubmitted] = useState(false);
+    const [answers, setAnswers] = useState(new Array(data.length + 1));
 
-    const handleRadioChange = (question: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setValue((event.target as HTMLInputElement).value);
-        console.log(question + value);
-        answers[question] = value;
+        answers[curQuestionIndx] = value;
+
+        if (curQuestionIndx < answers.length) {
+            setCurQuestionIndx(curQuestionIndx + 1);
+        }
     };
 
     const Questions = data.map((obj) => 
@@ -89,7 +94,7 @@ function FlashcardsPage(props: any) {
                 <RadioGroup
                     aria-labelledby="radio-buttons-group-label"
                     name="radio-buttons-group"
-                    onChange={(e) => handleRadioChange(obj.question)}
+                    onChange={handleRadioChange}
                 >
                     <FormControlLabel value={obj.options['a)']} control={<Radio />} label={obj.options['a)']} />
                     <FormControlLabel value={obj.options['b)']} control={<Radio />} label={obj.options['b)']} />
@@ -104,8 +109,8 @@ function FlashcardsPage(props: any) {
         event.preventDefault();
 
         // validate answers
-        for (let obj of data) {
-            if (answers[obj.question] === obj.correct_answer) {
+        for (let i = 0; i < data.length; i++) {
+            if (answers[i + 1] === data[i].correct_answer.slice(3)) {
                 setNumCorrect(numCorrect + 1);
             }
             else {
@@ -115,6 +120,8 @@ function FlashcardsPage(props: any) {
         
         console.log(answers);
         console.log(numCorrect + " - " + numIncorrect);
+
+        setIsQuizSubmitted(true);
     };
 
 
@@ -122,6 +129,7 @@ function FlashcardsPage(props: any) {
         <Container maxWidth="xs" sx={{ boxShadow: 3 }}>
             <h1>Multiple Choice Quiz</h1>
             <Divider light />
+            {!isQuizSubmitted && 
             <form onSubmit={handleSubmit}>
                 <FormControl>
                     { Questions }
@@ -131,6 +139,13 @@ function FlashcardsPage(props: any) {
                     </Button>
                 </FormControl>
             </form>
+            }
+            {isQuizSubmitted &&
+            <div>
+                <p>Thank you for taking the quiz!</p>
+                <p>Your score is {(numCorrect / (numCorrect + numIncorrect)) * 100}% :^)</p>
+            </div>
+            }
         </Container>
     );
 }
