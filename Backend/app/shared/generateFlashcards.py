@@ -26,7 +26,7 @@ def generateFlashcardsWithOpenAI(subjectName, gradeLevel, number):
 
     return response.choices[0].message['content']
     
-def parse_overview_to_json(overview_text):
+def parse_flashcards_to_json(overview_text):
     lines = overview_text.strip().split("\n") 
 
     json_objects = []
