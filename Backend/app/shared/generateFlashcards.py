@@ -1,7 +1,12 @@
 import openai
 import os
+import json
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
+
+def save_to_json(data, filename="flashcards.json"):
+    with open(filename, 'w') as f: 
+        json.dump(data, f)
 
 def generateFlashcardsWithOpenAI(subjectName, gradeLevel, number):
     system_msg = ("You are trained to create educational flashcards tailored to different "
@@ -21,7 +26,7 @@ def generateFlashcardsWithOpenAI(subjectName, gradeLevel, number):
 
     return response.choices[0].message['content']
     
-def parse_overview_to_json(overview_text):
+def parse_flashcards_to_json(overview_text):
     lines = overview_text.split("\n")
     json_objects = []
 
@@ -42,5 +47,6 @@ def parse_overview_to_json(overview_text):
     
 def generateFlashcards(level, topic, number):
     overview_text = generateFlashcardsWithOpenAI(topic, level, number)
-    response = parse_overview_to_json(overview_text)
+    response = parse_flashcards_to_json(overview_text)
+    save_to_json(response)
     return response
