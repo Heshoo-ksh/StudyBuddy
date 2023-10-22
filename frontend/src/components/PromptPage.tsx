@@ -12,14 +12,14 @@ function PromptPage() {
   };
 
   return (
-    <div>
+    <div className="prompt-wrapper">
         <h1>Please enter a topic for your study buddy to make flashcards for you :)</h1>
         <div className="form-wrapper">
             <div className="text-wrapper">
                 <TextField
                 fullWidth
                 id="outlined-multiline-static"
-                label="Please enter topic"
+                label="Please enter topic *"
                 multiline
                 rows={4}
                 placeholder="Enter topic..."
@@ -31,7 +31,7 @@ function PromptPage() {
             <div className="select-wrapper">
                 <Box sx={{ minWidth: 120 }}>
                     <FormControl fullWidth>
-                        <InputLabel id="simple-select-label">Flash Cards</InputLabel>
+                        <InputLabel id="simple-select-label">Flash Cards *</InputLabel>
                         <Select
                             labelId="simple-select-label"
                             id="simple-select"

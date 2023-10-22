@@ -2,7 +2,7 @@ import { Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } f
 import '../css/gradeLevelSelect.css';
 import { useState } from "react";
 
-function GradeLevelSelect() {
+function GradeLevelSelect(props: any) {
     const [nextDisabled, setNextDisabled] = useState(true);
     const [value, setValue] = useState('');
 
@@ -11,11 +11,16 @@ function GradeLevelSelect() {
         setNextDisabled(false);
     };
 
+    const handleClick = () => {
+        props.setShowGradeLevel(false);
+        props.setShowPromptPage(true);
+    }
+
   return (
     <div className="gradeLevelSelect">
         <h1>Welcome!</h1>
         <FormControl>
-            <FormLabel id="radio-buttons-group-label">Please Select Your Education Level:</FormLabel>
+            <FormLabel id="radio-buttons-group-label">Please Select Your Education Level: *</FormLabel>
             <RadioGroup
                 aria-labelledby="radio-buttons-group-label"
                 name="radio-buttons-group"
@@ -28,7 +33,15 @@ function GradeLevelSelect() {
                 <FormControlLabel value="college" control={<Radio />} label="College" />
             </RadioGroup>
         </FormControl>
-        <Button className="nextButton" variant="contained" disabled={nextDisabled} color="success">Next</Button>
+        <Button 
+        className="nextButton" 
+        variant="contained" 
+        disabled={nextDisabled} 
+        color="success"
+        onClick={handleClick}
+        >
+            Next
+        </Button>
     </div>
   );
 }
