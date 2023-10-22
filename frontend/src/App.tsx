@@ -7,6 +7,7 @@ import { AppBar, Box, Tab, Tabs } from '@mui/material';
 import SwipeableViews from 'react-swipeable-views';
 import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
+import FlashcardsPage from './components/FlashcardsPage';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -107,7 +108,7 @@ function App() {
               <MainPage level={levelVal} prompt={promptVal} numCards={numCards} />
             </TabPanel>
             <TabPanel value={value} index={1} dir={theme.direction}>
-              Item Two
+              <FlashcardsPage />
             </TabPanel>
             <TabPanel value={value} index={2} dir={theme.direction}>
               Item Three
