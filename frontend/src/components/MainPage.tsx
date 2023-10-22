@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import axios from 'axios';
 import '../css/mainPage.css';
-import { Container, Divider, Paper } from "@mui/material";
+import { Container, Divider } from "@mui/material";
 
 function MainPage(props: any) {
     useEffect(() => {

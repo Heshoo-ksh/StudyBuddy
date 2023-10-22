@@ -8,6 +8,7 @@ import SwipeableViews from 'react-swipeable-views';
 import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import FlashcardsPage from './components/FlashcardsPage';
+import MultiChoiceQuiz from './components/MultiChoiceQuiz';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -111,7 +112,7 @@ function App() {
               <FlashcardsPage />
             </TabPanel>
             <TabPanel value={value} index={2} dir={theme.direction}>
-              Item Three
+              <MultiChoiceQuiz />
             </TabPanel>
             <TabPanel value={value} index={3} dir={theme.direction}>
               Item Four

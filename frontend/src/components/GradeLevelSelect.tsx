@@ -38,7 +38,7 @@ function GradeLevelSelect(props: any) {
         className="nextButton" 
         variant="contained" 
         disabled={nextDisabled} 
-        color="success"
+        color="secondary"
         onClick={handleClick}
         >
             Next

@@ -58,7 +58,7 @@ function PromptPage(props: any) {
             className="nextButton" 
             variant="contained" 
             disabled={cardAmnt === "" || prompt.trim() === ""} 
-            color="success"
+            color="secondary"
             onClick = {handleClick}
             >
                 Next
