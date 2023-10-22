@@ -1,5 +1,5 @@
 from flask import request, jsonify
-from shared.openAIFunctions import generateContext
+from shared.generateOverview import generateContext
 
 def overview_routes(app):
 
