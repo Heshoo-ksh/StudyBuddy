@@ -7,7 +7,6 @@ def overview_routes(app):
     def get_overview_endpoint():
         level = request.args.get('level')
         topic = request.args.get('topic')
-        number = request.args.get('number')
 
-        response = generateContext(level, topic, number)
+        response = generateContext(level, topic)
         return jsonify(response)
