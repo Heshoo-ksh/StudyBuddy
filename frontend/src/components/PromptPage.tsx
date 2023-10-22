@@ -13,6 +13,10 @@ function PromptPage(props: any) {
   const handleClick = () => {
     props.setShowPromptPage(false);
     props.setShowMainPage(true);
+    props.setNumCards(cardAmnt as string);
+    console.log(cardAmnt);
+    console.log(prompt);
+    props.setPromptVal(prompt);
   }
 
   return (
