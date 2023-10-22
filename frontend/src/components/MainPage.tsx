@@ -38,7 +38,10 @@ function MainPage(props: any) {
   return (
     <>
       {(isLoading) ? 
-        (<CircularProgress color="secondary" />) : 
+        (<Container maxWidth="md" sx={{ boxShadow: 3 }}>
+          <h1>Loading Overview...</h1>
+          <CircularProgress color="secondary" />
+        </Container>) : 
         (<Container maxWidth="md" sx={{ boxShadow: 3 }}>
           <div className="mainPageWrapper">
             <h1>Here is an overview of your topic.</h1>
