@@ -3,7 +3,7 @@ import os
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-def generateOverview(subjectName, gradeLevel):
+def generateOverviewWithOpenAI(subjectName, gradeLevel):
 
     system_msg = ("You are trained to provide brief topic overviews tailored to different "
                   "grade levels. Use the user's provided topic and grade level to generate concise "
@@ -42,7 +42,7 @@ def parse_overview_to_json(overview_text):
 
     return json_objects
 
-def generateContext(level, topic, number):
-    overview_text = generateOverview(topic, level)
+def generateContext(level, topic):
+    overview_text = generateOverviewWithOpenAI(topic, level)
     response = parse_overview_to_json(overview_text)
     return response
